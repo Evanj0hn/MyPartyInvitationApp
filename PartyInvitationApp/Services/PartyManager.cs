@@ -1,7 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿namespace PartyInvitationApp.Services;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Threading.Tasks;
+
+
 
 public class PartyManager : IPartyManager
 {
@@ -44,9 +49,25 @@ public class PartyManager : IPartyManager
         var party = await GetPartyByIdAsync(partyId);
         if (party != null)
         {
+            var smtpClient = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential("your-email@gmail.com", "your-app-password"),
+                EnableSsl = true,
+            };
+
             foreach (var invitation in party.Invitations.Where(i => i.Status == InvitationStatus.InviteNotSent))
             {
-                // Send email logic here...
+                var mailMessage = new MailMessage
+                {
+                    From = new MailAddress("your-email@gmail.com"),
+                    Subject = "You're Invited!",
+                    Body = $"Click here to respond: <a href='http://localhost:5000/Invitation/Respond/{invitation.InvitationId}'>Respond</a>",
+                    IsBodyHtml = true,
+                };
+                mailMessage.To.Add(invitation.GuestEmail);
+
+                smtpClient.Send(mailMessage);
                 invitation.Status = InvitationStatus.InviteSent;
             }
             await _context.SaveChangesAsync();

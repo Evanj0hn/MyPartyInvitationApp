@@ -1,5 +1,30 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model Party
+
+<h2>Party Details</h2>
+
+<p><strong>Description:</strong> @Model.Description</p>
+<p><strong>Date:</strong> @Model.EventDate.ToShortDateString()</p>
+<p><strong>Location:</strong> @Model.Location</p>
+
+<h3>Invitations</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Guest Name</th>
+            <th>Email</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var invitation in Model.Invitations)
+        {
+            <tr>
+                <td>@invitation.GuestName</td>
+                <td>@invitation.GuestEmail</td>
+                <td>@invitation.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("Index", "Party")">Back to Parties</a>
