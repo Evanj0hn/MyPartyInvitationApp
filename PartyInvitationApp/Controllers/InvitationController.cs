@@ -17,40 +17,34 @@ namespace PartyInvitationApp.Controllers
         // GET: /Invitation/Respond/{id}
         public async Task<IActionResult> Respond(int id)
         {
-            var party = await _partyManager.GetPartyByIdAsync(id);
-            if (party == null)
+            var invitation = await _partyManager.GetInvitationByIdAsync(id);  // FIXED: Get the invitation, not the party
+            if (invitation == null)
             {
                 return NotFound();
             }
-            return View(party);
+            return View(invitation);
         }
 
-        // POST: /Invitation/Respond/{id}
+        // POST: /Invitation/Respond
         [HttpPost]
-        public async Task<IActionResult> Respond(int id, string response)
+        public async Task<IActionResult> Respond(int invitationId, string response)
         {
-            var party = await _partyManager.GetPartyByIdAsync(id);
-            if (party == null)
-            {
-                return NotFound();
-            }
-
-            var invitation = party.Invitations.Find(i => i.InvitationId == id);
+            var invitation = await _partyManager.GetInvitationByIdAsync(invitationId);  // FIXED
             if (invitation == null)
             {
                 return NotFound();
             }
 
-            if (response == "yes")
+            if (response == "Accept")
             {
-                invitation.Status = InvitationStatus.RespondedYes;
+                invitation.Status = InvitationStatus.Accepted;  // Matching UI response
             }
-            else if (response == "no")
+            else if (response == "Decline")
             {
-                invitation.Status = InvitationStatus.RespondedNo;
+                invitation.Status = InvitationStatus.Declined;
             }
 
-            await _partyManager.SendInvitationsAsync(id);
+            await _partyManager.UpdateInvitationAsync(invitation);  // Save the response
             return RedirectToAction("Details", "Party", new { id = invitation.PartyId });
         }
     }

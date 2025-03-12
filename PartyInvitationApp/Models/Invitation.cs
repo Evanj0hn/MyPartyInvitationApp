@@ -4,8 +4,8 @@ public enum InvitationStatus
 {
     InviteNotSent,
     InviteSent,
-    RespondedYes,
-    RespondedNo
+    Accepted,  
+    Declined   
 }
 
 public class Invitation

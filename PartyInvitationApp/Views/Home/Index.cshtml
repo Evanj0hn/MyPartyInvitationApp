@@ -1,8 +1,8 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Welcome to the Party Invitation App</h1>
+<p>This application helps you organize parties and send invitations to guests.</p>
+
+<a href="@Url.Action("Index", "Party")" class="btn btn-primary">View Parties</a>

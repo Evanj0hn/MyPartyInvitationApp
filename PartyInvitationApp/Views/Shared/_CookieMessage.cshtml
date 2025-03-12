@@ -1,5 +1,13 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    var firstVisit = Context.Request.Cookies["FirstVisit"];
+    if (string.IsNullOrEmpty(firstVisit))
+    {
+        firstVisit = DateTime.Now.ToString();
+        Context.Response.Cookies.Append("FirstVisit", firstVisit);
+        <p>Welcome! This is your first visit.</p>
+    }
+    else
+    {
+        <p>You first visited on: @firstVisit</p>
+    }
 }

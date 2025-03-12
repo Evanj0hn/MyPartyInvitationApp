@@ -6,6 +6,9 @@
 <p><strong>Date:</strong> @Model.EventDate.ToShortDateString()</p>
 <p><strong>Location:</strong> @Model.Location</p>
 
+<!-- "Send Invitations" Button -->
+<a href="@Url.Action("SendInvitations", "Party", new { id = Model.PartyId })" class="btn btn-info">Send Invitations</a>
+
 <h3>Invitations</h3>
 <table class="table">
     <thead>

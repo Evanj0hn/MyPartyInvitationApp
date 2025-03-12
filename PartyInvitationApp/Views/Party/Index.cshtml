@@ -1,6 +1,10 @@
 ﻿@model IEnumerable<Party>
 
-<h2>All Parties</h2>
+@{
+    ViewData["Title"] = "All Parties";
+}
+
+<h2>@ViewData["Title"]</h2>
 
 <table class="table">
     <thead>
@@ -19,11 +23,17 @@
                 <td>@party.EventDate.ToShortDateString()</td>
                 <td>@party.Location</td>
                 <td>
-                    <a href="@Url.Action("Details", "Party", new { id = party.PartyId })">View</a>
+                    <a href="@Url.Action("Details", "Party", new { id = party.PartyId })" class="btn btn-primary">View</a>
+                    <a href="@Url.Action("Edit", "Party", new { id = party.PartyId })" class="btn btn-warning">Edit</a>
+                    <a href="@Url.Action("Delete", "Party", new { id = party.PartyId })" class="btn btn-danger btn-delete">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-<a href="@Url.Action("Create", "Party")">Create New Party</a>
+<a href="@Url.Action("Create", "Party")" class="btn btn-success">Create New Party</a>
+
+@section Scripts {
+    <script src="~/js/site.js"></script>
+}

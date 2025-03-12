@@ -1,13 +1,30 @@
 ﻿<!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Party Invitation</title>
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <div>
+    <header>
+        <nav>
+            <a href="@Url.Action("Index", "Home")">Home</a> |
+            <a href="@Url.Action("Index", "Party")">Parties</a>
+        </nav>
+    </header>
+
+    <div class="container">
         @RenderBody()
     </div>
+
+    <footer>
+        <p>2025 - Party Invitation App</p>
+    </footer>
+
+    <!-- Include JavaScript file -->
+    <script src="~/js/site.js"></script>
+    @RenderSection("Scripts", required: false)
+
 </body>
 </html>

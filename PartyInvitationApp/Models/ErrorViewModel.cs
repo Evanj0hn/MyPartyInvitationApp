@@ -1,4 +1,4 @@
-namespace PartyInvitationApp.Models
+﻿namespace PartyInvitationApp.Models
 {
     public class ErrorViewModel
     {
@@ -7,3 +7,4 @@ namespace PartyInvitationApp.Models
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
 }
+

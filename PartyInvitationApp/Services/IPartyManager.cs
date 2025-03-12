@@ -1,12 +1,21 @@
-﻿namespace PartyInvitationApp.Services;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using PartyInvitationApp.Services;
 using System.Threading.Tasks;
+using PartyInvitationApp.Models;  
 
-public interface IPartyManager
+namespace PartyInvitationApp.Services
 {
-    Task<List<Party>> GetAllPartiesAsync();
-    Task<Party> GetPartyByIdAsync(int id);
-    Task CreatePartyAsync(Party party);
-    Task AddInvitationAsync(int partyId, Invitation invitation);
-    Task SendInvitationsAsync(int partyId);
+    public interface IPartyManager
+    {
+        Task<List<Party>> GetAllPartiesAsync();
+        Task<Party> GetPartyByIdAsync(int id);
+        Task CreatePartyAsync(Party party);
+        Task<Invitation> GetInvitationByIdAsync(int invitationId);
+        Task UpdateInvitationAsync(Invitation invitation);
+        Task AddInvitationAsync(int partyId, Invitation invitation);
+        Task RespondToInvitationAsync(int invitationId, InvitationStatus response);
+        Task SendInvitationsAsync(int partyId);
+        Task UpdatePartyAsync(Party party);
+
+    }
 }

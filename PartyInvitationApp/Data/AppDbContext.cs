@@ -1,4 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PartyInvitationApp.Models;  
+
+namespace PartyInvitationApp.Data;
 
 public class AppDbContext : DbContext
 {
