@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PartyInvitationApp.Data;  // Ensure this namespace exists
+using PartyInvitationApp.Data;  
 using PartyInvitationApp.Services;
 using System.Net;
 using System.Net.Mail;
@@ -16,7 +16,7 @@ builder.Services.AddControllersWithViews();
 
 // Configure Entity Framework Core with SQLite
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));  // ✅ Now using SQLite
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));  // using SQLite
 
 // Register the PartyManager service with Dependency Injection
 builder.Services.AddScoped<IPartyManager, PartyManager>();
